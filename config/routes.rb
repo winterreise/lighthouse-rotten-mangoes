@@ -1,6 +1,9 @@
 RottenMangoes::Application.routes.draw do
+  get "users/new"
+  get "users/create"
   resources :movies
-end  
+  resources :users, only: [:new, :create]
+end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
