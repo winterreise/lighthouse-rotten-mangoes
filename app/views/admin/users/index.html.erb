@@ -1,0 +1,21 @@
+<h1>Rotten Mangoes Users</h1>
+<table>
+  <tr>
+    <th>email</th>
+    <th>created_at</th>
+    <th>updated_at</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>is_admin</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.created_at %></td>
+      <td><%= user.updated_at %></td>
+      <td><%= user.firstname %></td>
+      <td><%= user.lastname %></td>
+      <td><%= user.is_admin %></td>
+    </tr>
+  <% end %>
+</table>
