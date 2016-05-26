@@ -1,5 +1,10 @@
 class Movie < ActiveRecord::Base
 
+  scope :contains_text, ->(q) { where("lower(title) like ? or lower(director) like ?", "%#{q.downcase}%", "%#{q.downcase}%") }
+  scope :less_than_90_minutes, -> { where("runtime_in_minutes <= 90") }
+  scope :between_90_and_120_minutes, -> { where("runtime_in_minutes > 90 and runtime_in_minutes <= 120") }
+  scope :more_than_120_minutes, -> { where("runtime_in_minutes > 120") }
+
   mount_uploader :poster_image_url, PosterUploader
 
   has_many :reviews
