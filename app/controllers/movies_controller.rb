@@ -5,25 +5,19 @@ class MoviesController < ApplicationController
     @query = params[:q]
     @duration = params[:duration]
 
-    if !params[:q] && !params[:duration]
-      @movies = Movie.all
-    else
-      @movies = Movie
-      if params[:q] && params[:q].length > 0
-        q = "%#{params[:q].downcase}%"
-        @movies = @movies.where("lower(title) like ? or lower(director) like ?", q, q)
-      end
+    if params[:q] || params[:duration]
+      @movies = Movie.contains_text(params[:q])
 
       case params[:duration]
       when "1"
-        @movies = @movies.where("runtime_in_minutes <= 90")
+        @movies = @movies.merge(Movie.less_than_90_minutes)
       when "2"
-        @movies = @movies.where("runtime_in_minutes > 90 and runtime_in_minutes <= 120")
+        @movies = @movies.merge(Movie.between_90_and_120_minutes)
       when "3"
-        @movies = @movies.where("runtime_in_minutes > 120")
-      else
-        @movies = @movies.where("runtime_in_minutes > 0")
+        @movies = @movies.merge(Movie.more_than_120_minutes)
       end
+    else
+      @movies = Movie.all
     end
   end
 
