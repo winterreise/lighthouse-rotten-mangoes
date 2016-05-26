@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_filter :restrict_to_admin
 
   def index
-   @users = User.all
+   @users = User.order(:email).page params[:page]
   end
 
   def show

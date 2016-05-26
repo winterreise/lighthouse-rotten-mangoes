@@ -38,6 +38,9 @@ gem 'bcrypt', '~> 3.1.0'
 # File uploading
 gem 'carrierwave', '0.11.2'
 
+# Pagination
+gem 'kaminari', '0.16.3'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
