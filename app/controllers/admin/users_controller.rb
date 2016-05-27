@@ -19,11 +19,18 @@ class Admin::UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id # auto login
-      redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}!"
+      redirect_to movies_path, notice: "Popcorn's ready, #{@user.firstname}!"
     else
       render :new
     end
   end
+
+  def destroy
+   @user = User.find(params[:id])
+   @user.destroy
+   redirect_to admin_users_path
+  end
+
 
 
   protected

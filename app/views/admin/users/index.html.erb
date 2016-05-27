@@ -16,6 +16,13 @@
       <td><%= user.firstname %></td>
       <td><%= user.lastname %></td>
       <td><%= user.is_admin %></td>
+      <td>
+        <form method="POST" action="<%= admin_user_path(user.id) %>">
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <input type="hidden" name="_method" value="DELETE"> <!-- sinatra/rails hack to fake delete HTTP verb from a form -->
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </td>
     </tr>
   <% end %>
 </table>
